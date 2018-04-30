@@ -1,7 +1,6 @@
 //connect Node to MySQL
 var mysql = require("mysql");
 
-var conn=  function( ){
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -18,5 +17,5 @@ connection.connect(function(err) {
   
     console.log("connected as id " + connection.threadId);
   });
-}
-module.exports = conn;
+
+module.exports = connection;
