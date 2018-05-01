@@ -3,7 +3,7 @@ var connection = require("./connection.js");
 
 var orm = function() {
     var selectAll = function() {
-        app.get("/", function(req, res) {
+        
         connection.query("SELECT * FROM burgers;", function (err, data){
             if (err) {
                 return res.status(500).end();
@@ -12,13 +12,11 @@ var orm = function() {
 
             //end of connection.query for select all
         });
-        // end of app.get function
-        });
+       
     //end of selectAll function
     };
     
-    var insertOne= function() {
-        app.post("/api", function(req, res) {
+    var insertOne = function() {
             connection.query("INSERT INTO burgers (burger_name, devoured) VALUES (?)", [req.body.burger_name, req.body.devoured], function(err, result) {
               if (err) {
                 return res.status(500).end();
@@ -28,12 +26,10 @@ var orm = function() {
               res.json({ id: result.insertId });
               console.log({ id: result.insertId });
             });
-          });
     //end of insertOne function
     };
     var updateOne = function() {
-        pp.put("/api/:id", function(req, res) {
-            connection.query("UPDATE burgers SET burger_name = ? WHERE id = ?", [req.body.burger_name, req.params.id], function(err, result) {
+        connection.query("UPDATE burgers SET burger_name = ? WHERE id = ?", [req.body.burger_name, req.params.id], function(err, result) {
               if (err) {
                 // If an error occurred, send a generic server failure
                 return res.status(500).end();
@@ -45,7 +41,6 @@ var orm = function() {
               res.status(200).end();
           
             });
-          });
      // end of updateOne function   
     };
 // end of orm module
