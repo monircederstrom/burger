@@ -1,0 +1,14 @@
+.bacon {
+  
+    background: url("../img/bacon.jpeg"), center;
+
+    color: pink;
+}
+body {
+    background-color: black;
+    color: pink;
+    text-align: center;
+}
+ul {
+    text-align: left;
+}

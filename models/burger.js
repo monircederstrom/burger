@@ -1,4 +1,4 @@
-var orm = require("orm");
+var orm = require("../config/orm.js");
 
 var models = function() {
     app.get("/", function(req, res) {
