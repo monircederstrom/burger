@@ -1,7 +1,8 @@
 var express = require("express");
 var burger = require("./../models/burger.js");
 
-var router = express.Router();
+var router = express.Router()
+
 
 router.get("/", (req, res) => {
     burger.selectAll( (data) => {
