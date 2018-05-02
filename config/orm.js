@@ -1,48 +1,76 @@
-var connection = require("./connection.js");
+var connection = require("../config/connection.js");
 
+function objToSql(ob) {
+  var arr = [];
 
-var orm = function() {
-    var selectAll = function() {
-        
-        connection.query("SELECT * FROM burgers;", function (err, data){
-            if (err) {
-                return res.status(500).end();
+  // loop through the keys and push the key/value as a string int arr
+  for (var key in ob) {
+    var value = ob[key];
+    // check to skip hidden properties
+    if (Object.hasOwnProperty.call(ob, key)) {
+      // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')
+      if (typeof value === "string" && value.indexOf(" ") >= 0) {
+        value = "'" + value + "'";
+      }
+      // e.g. {name: 'BigMac'} => ["name='BigMac'"]
+      // e.g. {devoured: true} => ["devoured=true"]
+      arr.push(key + "=" + value);
+    }
+  }
+
+  // translate array of strings to a single comma-separated string
+  return arr.toString();
+}
+
+var orm = {
+    selectAll: function(tableInput, cb) {
+        var queryString = "SELECT ?? FROM " + tableInput + ";";
+        connection.query(queryString, function(err, result) { 
+            if (err) { throw err;
             }
-            res.render("index", {burger_name: data});
-
+            cb(result);
             //end of connection.query for select all
-        });
-       
+            });
     //end of selectAll function
-    };
+    },
     
-    var insertOne = function() {
-            connection.query("INSERT INTO burgers (burger_name, devoured) VALUES (?)", [req.body.burger_name, req.body.devoured], function(err, result) {
-              if (err) {
-                return res.status(500).end();
-              }
-          
-              // Send back the ID of the new todo
-              res.json({ id: result.insertId });
-              console.log({ id: result.insertId });
-            });
-    //end of insertOne function
+    insertOne: function(table, cols, vals, cb) {
+        var queryString = "INSERT INTO " + table;
+        queryString += " (";
+        queryString += cols.toString();
+        queryString += ") ";
+        queryString += "VALUES (";
+        queryString += printQuestionMarks(vals.length);
+        queryString += ") ";
+    
+        console.log(queryString);
+    
+        connection.query(queryString, vals, function(err, result) {
+          if (err) {
+            throw err;
+          }
+    
+          cb(result);
+        //end of connection.query
+        });
+        //end of insertOne function
+      },
+    updateOne: function(table, objColVals, condition, cb) {
+        var queryString = "UPDATE" + table;
+        queryString += " SET ";
+        queryString += objToSql(objColVals);
+        queryString += " WHERE ";
+        queryString += condition;
+    
+        console.log(queryString);
+        connection.query(queryString, function(err, result) {
+          if (err) {
+            throw err;
+          }
+    
+          cb(result);
+        });
+      }
     };
-    var updateOne = function() {
-        connection.query("UPDATE burgers SET burger_name = ? WHERE id = ?", [req.body.burger_name, req.params.id], function(err, result) {
-              if (err) {
-                // If an error occurred, send a generic server failure
-                return res.status(500).end();
-              }
-              else if (result.changedRows === 0) {
-                // If no rows were changed, then the ID must not exist, so 404
-                return res.status(404).end();
-              }
-              res.status(200).end();
-          
-            });
-     // end of updateOne function   
-    };
-// end of orm module
-};
+
 module.exports = orm;

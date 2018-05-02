@@ -1,21 +1,30 @@
 var orm = require("../config/orm.js");
 
-var models = function() {
-    app.get("/", function(req, res) {
-        orm.selectAll()
-    //end of app.get
-    });
-    app.post("/api", function(req, res) {
-        orm.insertOne();
-    //end of app.post
-    });
-    app.put("/api/:id", function(req, res) {
-        orm.updateOne();
-    // end of app.put
-    });
+var burger =  {
+    selectAll: function(cb) {
+        orm.selectAll("burgers", function(res) {
+            cb(res);
+        //end of orm.selectAll
+        });
+    //end of selectAll:
+    },
+    insertOne: function(cols, vals, cb) {
+        orm.insertOne("burgers", cols, vals, function(res) {
+            cb(res);
+        //end of orm.insertOne
+        });
+    //end of insertOne:
+    },
+    updateOne: function(objColVals, condition, cb) {
+        orm.updateOne("burgers", objColVals, condition, function(res){
+            cb(res);
+        //end of orm.updateOne
+        });
+    // end of updateOne:
+    }
 
 
-//end of models function    
+//end of burger function    
 };
 
-module.exports = models;
+module.exports = burger;
