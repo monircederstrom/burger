@@ -1,26 +1,26 @@
-var connection = require("../config/connection.js");
+var connection = require("./connection.js");
 
-function objToSql(ob) {
-  var arr = [];
+//function objToSql(ob) {
+  //var arr = [];
 
   // loop through the keys and push the key/value as a string int arr
-  for (var key in ob) {
-    var value = ob[key];
+  //for (var key in ob) {
+    //var value = ob[key];
     // check to skip hidden properties
-    if (Object.hasOwnProperty.call(ob, key)) {
+    //if (Object.hasOwnProperty.call(ob, key)) {
       // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')
-      if (typeof value === "string" && value.indexOf(" ") >= 0) {
-        value = "'" + value + "'";
-      }
+      //if (typeof value === "string" && value.indexOf(" ") >= 0) {
+        //value = "'" + value + "'";
+     // }
       // e.g. {name: 'BigMac'} => ["name='BigMac'"]
       // e.g. {devoured: true} => ["devoured=true"]
-      arr.push(key + "=" + value);
-    }
-  }
+      //arr.push(key + "=" + value);
+   // }
+  //}
 
   // translate array of strings to a single comma-separated string
-  return arr.toString();
-}
+  //return arr.toString();
+//}
 
 var orm = {
     selectAll: function(tableInput, cb) {
@@ -56,7 +56,7 @@ var orm = {
         //end of insertOne function
       },
     updateOne: function(table, objColVals, condition, cb) {
-        var queryString = "UPDATE" + table;
+        var queryString = "UPDATE " + table;
         queryString += " SET ";
         queryString += objToSql(objColVals);
         queryString += " WHERE ";
