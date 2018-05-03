@@ -24,7 +24,7 @@ var connection = require("./connection.js");
 
 var orm = {
     selectAll: function(tableInput, cb) {
-        var queryString = "SELECT ?? FROM " + tableInput + ";";
+        var queryString = "SELECT * FROM burgers";
         connection.query(queryString, function(err, result) { 
             if (err) { throw err;
             }
@@ -35,7 +35,7 @@ var orm = {
     },
     
     insertOne: function(table, cols, vals, cb) {
-        var queryString = "INSERT INTO " + table;
+        var queryString = "INSERT INTO " + burger;
         queryString += " (";
         queryString += cols.toString();
         queryString += ") ";
@@ -56,7 +56,7 @@ var orm = {
         //end of insertOne function
       },
     updateOne: function(table, objColVals, condition, cb) {
-        var queryString = "UPDATE " + table;
+        var queryString = "UPDATE " + burgers;
         queryString += " SET ";
         queryString += objToSql(objColVals);
         queryString += " WHERE ";

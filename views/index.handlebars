@@ -55,9 +55,10 @@
         var updateBurger = {
            burger_name: $("#updateburger [name=burger_name]").val().trim()
         };
-    });
+    
 
     // Send the PUT request.
+    
     $.ajax("/burgers/" + id, {
       type: "PUT",
       data: updateBurger
@@ -67,9 +68,8 @@
         // Reload the page to get the updated list
         location.reload();
       }
-    );
-  });
-
+  );
+    });
 
 
 </script>

@@ -1,14 +1,17 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 //var mysql = require("mysql");
-// Set the port of our application
+
+
 
 var app = express();
-var PORT = 8181;
+var path = require("path");
+// Set the port of our application
+var PORT = process.env.PORT || 9500;
 // Sets up the Express app to handle data parsing
-//app.use(express.static("public"));
+app.use(express.static("public"));
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
@@ -25,6 +28,6 @@ app.use("/", routes);
 
 //
 
-app.listen(PORT, () => {
+app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
 });
