@@ -5,7 +5,6 @@ var bodyParser = require("body-parser");
 //var mysql = require("mysql");
 
 
-
 var app = express();
 //var path = require("path");
 // Set the port of our application
