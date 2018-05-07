@@ -1,14 +1,53 @@
-.bacon {
-  
-    background: url("../img/bacon.jpeg"), center;
-
-    color: pink;
-}
 body {
-
+    background: url("../img/bacon.jpeg");
+    background-size: 100%;
     color: pink;
     text-align: center;
 }
-ul {
+.row1 {
+    width: 100%;
+    text-align: center;
+}
+#uneaten {
     text-align: left;
+    float: left;
+    width: 48%;
+    margin-left: 2%;
+}
+#burgerhead {
+    text-align: center;
+}
+#eaten {
+    text-align: right;
+    float: left;
+    width: 48%;
+    margin-right: 2%;
+}
+img {
+    width: 45%;
+    height: 25%;
+}
+
+.row1 {
+    float: left;
+}
+.row2 {
+    padding: 2%;
+    float: left;
+    width: 100%;
+}
+.burgerpic {
+    width: 45%;
+    float: left;
+    text-align: right;
+    padding-right: 5%;
+
+}
+#burgercreation {
+    width: 50%;
+    text-align: left;
+    float: left;
+}
+#enter_text {
+    width: 50%;
 }

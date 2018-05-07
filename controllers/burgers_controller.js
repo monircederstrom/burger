@@ -4,16 +4,20 @@ var burger = require("../models/burger.js");
 var router = express.Router();
 
 router.get("/", function(req, res) {
-    burger.selectAll(function(data) {
-    var hbsObject = { burgers: data };
-    console.log(hbsObject);
-    res.render("index", hbsObject);
-    //end of burger.selectAll
-    });
-//end of router.get
+  res.redirect("/burgers");
+});
+router.get("/burgers", function(req, res) {
+    
+  // express callback response by calling burger.selectAllBurger
+  burger.selectAll(function(burgerData) {
+
+    //MySQL query callback will return burger_data
+    res.render("index", { burger_data: burgerData });
+
+  });
 });
 
-router.post("/api/burgers", function(req, res) {
+router.post("/burgers", function(req, res) {
     burger.insertOne([
        "burger_name", "devoured" 
     ], [req.body.burger_name, req.body.devoured], function(result) {

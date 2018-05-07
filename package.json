@@ -1,7 +1,7 @@
 {
   "name": "burger",
   "version": "1.0.0",
-  "description": "",
+  "description": "This app useds MySQL, NODE.js, express.js, and hadlebars to create a burger logger.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -19,10 +19,8 @@
   "homepage": "https://github.com/monircederstrom/burger#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "espress": "0.0.0",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
-    "handlebars-helper-css": "^0.1.0",
     "mysql": "^2.15.0",
     "path": "^0.12.7"
   }

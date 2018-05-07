@@ -1,19 +1,22 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+//var methodOverride = require('method-override');
+
 //var mysql = require("mysql");
 
 
 
 var app = express();
-var path = require("path");
+//var path = require("path");
 // Set the port of our application
 var PORT = process.env.PORT || 9500;
 // Sets up the Express app to handle data parsing
 app.use(express.static("public"));
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+//app.use(methodOverride('_method'));
 
 // Set Handlebars.
 var exphbs = require("express-handlebars");

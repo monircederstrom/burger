@@ -6,80 +6,83 @@
         <link rel="stylesheet" type="text/css" href="assets/css/burger_style.css">
     </head>
     <body>
-        <h1>Burgers</h1>
-        <img src=
-        <div class="bacon">
-        <ul>
-            {{#each burger_name}}
-            <li>
-                <p>
-                    {{this.id}}. {{this.burger_name}}
-                   
-                </p>
-            </li>
-            {{/each}}
-        </ul>
-        
-        <h2>Create a Burger</h2>
-        <form id="createburger" class="button-size">
-            <textarea type="text" name="burger"></textarea>
-            <button type="submit">Save Burger!</button>
-        </form>
-        
-        <h2>Update a Burger</h2>
-        <form id="updateburger" class="button-size">
-            <select name="id">
-                {{#each burger_name}}
-                <option value="{{this.id}}">{{this.burger_name}}</option>
-                {{/each}}
-            </select>
-        
-        <textarea type="text" name="burger" placeholder="Llano Poblano"></textarea>
-        <button type="submit">Update Burger</button>
-        </form>
+    <div class="container">
+        <div class="row1">
+          <div class="col-sm-12 text-center" id="burgerhead"></div>
+            <h1>Burger Header</h1>
+          </div>
         </div>
-        <script type="text/javascript">
-            $("#createburger").on("submit", function(event) {
-                event.preventDefault();
-                var newBurger = {
-                    burger_name: $("#createburger [name=burger_name]").val().trim()
-                };
-                //send post request
-                $.ajax("/movies", {
-                    type: "POST",
-                    data: newBurger
-                }).then(
-                    function() {
-                        console.log("New burger created!");
-                        //refresh page to get updated list
-                        location.reload();
-                    }
-                );
-            });
-        
-            
-            $("#updateburger").on("submit", function(event) {
-                event.preventDefault();
-                var id = $("[name=id]").val().trim();
-                var updateBurger = {
-                   burger_name: $("#updateburger [name=burger_name]").val().trim()
-                };
-            });
-        
-            // Send the PUT request.
-            $.ajax("/burgers/" + id, {
-              type: "PUT",
-              data: updateBurger
-            }).then(
-              function() {
-                console.log("updated id ", id);
-                // Reload the page to get the updated list
-                location.reload();
-              }
-            );
-        
-        
-        
-        </script>        
+        <div class="row">
+            <div class="col-sm" id="uneaten">
+                <p>
+                {{#each burger_name}}
+                {{#unless this.devoured}}
+                </p>
+                <div class="burger1">
+                    <p>
+                        {{this.id}}. {{this.burger_name}}
+                    </p>
+                </div>
+                <br>
+                <form class="buttonform button-size">
+                    <input type="hidden" class="burger_id" type="text" value={{this.id}}>
+                    <br>
+                    <button type="submit" class="btn btn-default" id="eat">Eat it!</button>
+                </form>
+                {{/unless}} {{/each}}
+            </div>
+            <div class="col-sm" class="task" id="eaten">
+                <p> {{#each burger_name}} {{#if this.devoured}} </p>
+
+            </div>
+        </div>
+    </div>
+        <div class="row2">  
+            <div class="col-sm-12" id="burgercreation">
+                <form action="/burgers/create" method="POST">
+                    <input type="text" class="form-control" name="burger_name" value="" id="enter_text" placeholder="Big Mac">
+                    <button type="submit" class="btn btn-primary" id="text-enter-button">Submit</button>
+                </form>
+                <p>Enter your dream burger and click submit! </p>
+            </div>
+            <div class="burgerpic">
+                    <img src="assets/img/burger1.jpeg"/>
+            </div>
+        </div>
     </body>
+    
+    <script type="text/javascript">
+        $(".eat").on("click", function(event) {
+          var id = $(this).data("burger");
+          // Send the DELETE request.
+          $.ajax("/burgers/" + id, {
+            type: "DEVOUR"
+          }).then(
+            function() {
+              console.log("deleted id ", id);
+              // Reload the page to get the updated list
+              location.reload();
+            }
+          );
+        });
+        $("#text-enter-button").on("click", function(event) {
+          // Make sure to preventDefault on a submit event.
+          event.preventDefault();
+          var newBurger = {
+            burger: $("#text-enter-button [name=burger]").val().trim()
+          };
+          // Send the POST request.
+          $.ajax("/burgers/", {
+            type: "POST",
+            data: newBurger
+          }).then(
+            function() {
+              console.log("added new burger");
+              // Reload the page to get the updated list
+              location.reload();
+            }
+          );
+        });
+      </script>
+        </script>
 </html>
