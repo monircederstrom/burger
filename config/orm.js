@@ -39,7 +39,7 @@ var orm = {
     },
     
     insertOne: function(table, cols, vals, cb) {
-        var queryString = "INSERT INTO " + burger;
+        var queryString = "INSERT INTO " + burgers;
         queryString += " (";
         queryString += cols.toString();
         queryString += ") ";

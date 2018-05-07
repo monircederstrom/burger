@@ -45,7 +45,7 @@
     
     <script type="text/javascript">
         $("#eat").on("click", function(event) {
-          var id = $(this).data("burger");
+          var id = $(this).burger_data("burger");
           // Send the DELETE request.
           $.ajax("/burgers/" + id, {
             type: "DEVOUR"
@@ -66,7 +66,7 @@
           // Send the POST request.
           $.ajax("/burgers/", {
             type: "POST",
-            data: newBurger
+            burger_data: newBurger
           }).then(
             function() {
               console.log("added new burger");

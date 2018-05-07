@@ -3,6 +3,7 @@ var mysql = require("mysql");
 
 var connection; 
 if (process.env.JAWSDB_URL) {
+  console.log('jawsdb detected');
   connection = mysql.createConnection(process.env.JAWSDB_URL);
 }else{
   connection = mysql.createConnection({
@@ -10,9 +11,9 @@ if (process.env.JAWSDB_URL) {
     host: "localhost",
     user: "root",
     password: "",
-    database: "burger_db"
-  })
-}
+    database: "burgers_db"
+  });
+};
 
 connection.connect(function(err) {
     if (err) {
