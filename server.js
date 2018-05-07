@@ -9,7 +9,7 @@ var bodyParser = require("body-parser");
 var app = express();
 //var path = require("path");
 // Set the port of our application
-var PORT = process.env.PORT || 9500;
+var PORT = process.env.PORT || 3000;
 // Sets up the Express app to handle data parsing
 app.use(express.static("public"));
 // parse application/x-www-form-urlencoded
