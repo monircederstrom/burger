@@ -23,7 +23,7 @@
           var newBurger = $("#enter_text").val();
          
                     // Send the POST request.
-                    $.ajax("/burgers/", {
+                    $.ajax("/burgers/create", {
                       type: "POST",
                       data: newBurger
                     }).then(
@@ -32,6 +32,6 @@
                         // Reload the page to get the updated list
                         location.reload();
                       });
-          };
+          });
         });
-      })
+      
