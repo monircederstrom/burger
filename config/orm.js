@@ -9,7 +9,7 @@ function printQuestionMarks(num) {
   }
 
   return arr.toString();
-}
+};
 
 function objToSql(ob) {
   
@@ -17,10 +17,10 @@ function objToSql(ob) {
 
   for (var key in ob) {
     arr.push(key + "=" + ob[key]);
-  }
+  };
 
   return arr.toString();
-}
+};
 
 var orm = {
     selectAll: function(tableInput, cb) {
@@ -38,23 +38,21 @@ var orm = {
     //end of selectAll function
     },
     
-    insertOne: function(table, cols, vals, cb) {
-        var queryString = "INSERT INTO" + table;
-        queryString = queryString + ' (';
-        queryString = queryString + cols.toString();
-        queryString = queryString + ") ";
-        queryString = queryString + "VALUES (";
-        queryString = queryString + printQuestionMarks(vals.length);
-        queryString = queryString + ") ";
-    
-        console.log(queryString);
-    
-        connection.query(queryString, vals, function(err, result) {
-          if (err) throw err;
-          cb(result);
-        //end of connection.query
-        });
-        //end of insertOne function
+    create: function(table, col, vals, cb){
+      var queryString = 'INSERT INTO ' + table;
+      queryString = queryString + ' (';
+      queryString = queryString + col.toString(); 
+      queryString = queryString + ') ';
+      queryString = queryString + 'VALUES (';
+      queryString = queryString + printQuestionMarks(vals.length);
+      queryString = queryString + ') ';
+  
+      connection.query(queryString, vals, function(err, result){
+        if(err) throw err;
+        cb(result);
+      });
+  
+        //end of create function
       },
     updateOne: function(table, objColVals, condition, cb) {
         var queryString = "UPDATE " + "burgers";
