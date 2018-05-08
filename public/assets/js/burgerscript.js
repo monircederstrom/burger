@@ -4,7 +4,7 @@
           event.preventDefault();
           var id = $(this).data("burgerid");
           console.log(id)
-          // Send the DELETE request.
+          // Send the  request.
           $.ajax("/burgers/" + id, {
             type: "PUT",
             data: {
@@ -17,13 +17,13 @@
               location.reload();
             });
         });
-        $("#text-enter-button").on("click", function(event) {
+        $("#createburg").on("click", function(event) {
           // Make sure to preventDefault on a submit event.
           event.preventDefault();
-          var newBurger = $("#enter_text").val();
+          var newBurger = $("#burgerinput").val();
          
                     // Send the POST request.
-                    $.ajax("/burgers/create", {
+                    $.ajax("/burgers/", {
                       type: "POST",
                       data: newBurger
                     }).then(
