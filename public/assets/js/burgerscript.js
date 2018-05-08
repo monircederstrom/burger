@@ -23,9 +23,11 @@
           var newBurger = $("#burgerinput").val();
          
                     // Send the POST request.
-                    $.ajax("/burgers/", {
+                    $.ajax("/burgers/create", {
                       type: "POST",
-                      data: newBurger
+                      data: {
+                          b_name: newBurger
+                      }
                     }).then(
                       function() {
                         console.log("added new burger");
