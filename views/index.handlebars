@@ -32,10 +32,14 @@
     </div>
         <div class="row2">  
             <div class="col-sm-12" id="burgercreation">
-                <form action="burgers/:id" method="POST "id="createburger">
-                    <input type="text" class="form-control" name="b_name" value="" id="enter_text" placeholder="Big Mac">
-                    <button type="submit" class="btn btn-primary" id="text-enter-button">Submit</button>
-                </form>
+                <form class="create-update-form" action="burgers/create" method="POST">
+
+			<div class="form-group">
+				<textarea class="form-control input-lg" type="text" name="b_name" rows="3"> </textarea>
+			</div>
+
+			<button class="btn btn-default btn-lg" type="submit">Create Burger!</button>
+            </form>
                 <p>Enter your dream burger and click submit! </p>
             </div>
             <div class="burgerpic">

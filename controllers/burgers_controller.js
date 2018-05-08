@@ -17,14 +17,14 @@ router.get("/burgers", function(req, res) {
   });
 });
 
-router.post("/burgers", function(req, res) {
-    burger.insertOne(["burger_name", "devoured"], [req.body.b_name, false], function(result) {
+router.post("/burgers/create", function(req, res) {
+    burger.create(["burgerName"], [req.body.b_name], function(data) {
         //send id back of new burger
-        res.json({ id: result.insertID });
+        res.redirect("/burgers");
        
     //end of burger.insertOne
     });
-    res.redirect('/burgers')
+    
 //end of router.post
 });
 
