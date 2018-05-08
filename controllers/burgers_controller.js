@@ -17,12 +17,14 @@ router.get("/burgers", function(req, res) {
   });
 });
 
-router.post("/burgers/insertOne", function(req, res) {
-    burger.insertOne(["burger_name"], [req.body.b_name], function(data) {
+router.post("/burgers", function(req, res) {
+    burger.insertOne(["burger_name", "devoured"], [req.body.b_name, false], function(result) {
         //send id back of new burger
-        res.redirect('/burgers')
+        res.json({ id: result.insertID });
+       
     //end of burger.insertOne
     });
+    res.redirect('/burgers')
 //end of router.post
 });
 

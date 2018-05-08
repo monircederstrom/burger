@@ -13,6 +13,7 @@ body {
     float: left;
     width: 48%;
     margin-left: 2%;
+    padding-left: 2%;
 }
 #burgerhead {
     text-align: center;
@@ -22,6 +23,7 @@ body {
     float: left;
     width: 48%;
     margin-right: 2%;
+    padding-right: 2%;
 }
 img {
     width: 45%;
