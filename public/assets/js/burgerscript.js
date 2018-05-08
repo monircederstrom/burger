@@ -20,7 +20,7 @@
         $("#text-enter-button").on("click", function(event) {
           // Make sure to preventDefault on a submit event.
           event.preventDefault();
-          var newBurger = $("b_name").val().trim();
+          var newBurger = $("b_name").val();
           if (newBurger.length > 0){
             var addBurger ={
               burger: newBurger
