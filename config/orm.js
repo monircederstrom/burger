@@ -1,30 +1,30 @@
 var connection = require("./connection.js");
 
-function objToSql(ob) {
+
+function printQuestionMarks(num) {
   var arr = [];
 
-  //loop through the keys and push the key/value as a string int arr
-  for (var key in ob) {
-    var value = ob[key];
-    // check to skip hidden properties
-    if (Object.hasOwnProperty.call(ob, key)) {
-      // if string with spaces, add quotations (Mega burger => 'Mega burger')
-      if (typeof value === "string" && value.indexOf(" ") >= 0) {
-        value = "'" + value + "'";
-     }
-      // e.g. {name: 'BigMac'} => ["name='BigMac'"]
-      //e.g. {devoured: true} => ["devoured=true"]
-      arr.push(key + "=" + value);
-   }
+  for (var i = 0; i < num; i++) {
+    arr.push("?");
   }
 
-  // translate array of strings to a single comma-separated string
   return arr.toString();
-};
+}
+
+function objToSql(ob) {
+  
+  var arr = [];
+
+  for (var key in ob) {
+    arr.push(key + "=" + ob[key]);
+  }
+
+  return arr.toString();
+}
 
 var orm = {
     selectAll: function(tableInput, cb) {
-      var queryString = "SELECT * FROM burgers;";
+      var queryString = "SELECT * FROM burgers";
 
       // database query
       connection.query(queryString, function(err, result) {
@@ -39,7 +39,7 @@ var orm = {
     },
     
     insertOne: function(table, cols, vals, cb) {
-        var queryString = "INSERT INTO " + burgers;
+        var queryString = "INSERT INTO burgers";
         queryString += " (";
         queryString += cols.toString();
         queryString += ") ";
@@ -60,7 +60,7 @@ var orm = {
         //end of insertOne function
       },
     updateOne: function(table, objColVals, condition, cb) {
-        var queryString = "UPDATE " + burgers;
+        var queryString = "UPDATE " + "burgers";
         queryString += " SET ";
         queryString += objToSql(objColVals);
         queryString += " WHERE ";
