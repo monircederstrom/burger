@@ -17,7 +17,7 @@ router.get("/burgers", function(req, res) {
   });
 });
 
-router.post("/burgers/create", function(req, res) {
+router.post("/burgers/insertOne", function(req, res) {
     burger.insertOne(["burger_name"], [req.body.b_name], function(data) {
         //send id back of new burger
         res.redirect('/burgers')
