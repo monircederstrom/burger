@@ -2,7 +2,7 @@
     $(document).ready(function () {
         $("#eat").on("click", function(event) {
           event.preventDefault();
-          var id = $(this).data("burgerid");
+          var id = $(this).data("data-burgerid");
           console.log(id)
           // Send the  request.
           $.ajax("/burgers/" + id, {

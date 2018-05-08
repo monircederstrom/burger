@@ -28,13 +28,14 @@ router.post("/burgers/create", function(req, res) {
 //end of router.post
 });
 
-router.put("/burgers/:id", function(req, res) {
+router.put("/burgers/update/:id", function(req, res) {
     var condition = "id = " + req.params.id;
   
-    console.log("condition", condition);
+    console.log("condition ", condition);
   
     burger.updateOne({
-      'devoured': req.body.devoured}, condition, function(data) {
+      'devoured': true}, condition, function(data) {
+      
         res.redirect('/burgers');
       
     //end of burger.updateOne

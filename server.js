@@ -1,6 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-//var methodOverride = require('method-override');
+var methodOverride = require('method-override');
 
 //var mysql = require("mysql");
 
@@ -11,6 +11,7 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 // Sets up the Express app to handle data parsing
 app.use(express.static("public"));
+app.use(methodOverride('_method'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
