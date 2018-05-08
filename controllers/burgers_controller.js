@@ -1,47 +1,41 @@
 var express = require("express");
-
-var burger = require("../models/burger.js");
 var router = express.Router();
+var burger = require("../models/burger.js");
+
 
 router.get("/", function(req, res) {
-  res.redirect("/burgers");
+  res.redirect("/burgers")
 });
 router.get("/burgers", function(req, res) {
     
   // express callback response by calling burger.selectAllBurger
-  burger.selectAll(function(burgerData) {
-
+  burger.selectAll(function(data) {
+      var hbsObject = {burgers: data};
+      console.log(hbsObject);
     //MySQL query callback will return burger_data
-    res.render("index", { burger_data: burgerData });
-
+    res.render("index", hbsObject);
   });
 });
 
-router.post("/burgers", function(req, res) {
+router.post("/burgers/create", function(req, res) {
     burger.insertOne([
-       "burger_name", "devoured" 
-    ], [req.body.burger_name, req.body.devoured], function(result) {
+       "burger_name"], [req.body.burger_name], function(data) {
         //send id back of new burger
-        res.json({ id: result.insertId });
+        res.redirect('/burgers')
     //end of burger.insertOne
     });
 //end of router.post
 });
 
-router.put("/api/burgers/:id", function(req, res) {
+router.put("/burgers/:id", function(req, res) {
     var condition = "id = " + req.params.id;
   
     console.log("condition", condition);
   
     burger.updateOne({
-      devoured: req.body.devoured
-    }, condition, function(result) {
-      if (result.changedRows == 0) {
-        // If no rows were changed, then the ID must not exist, so 404
-        return res.status(404).end();
-      } else {
-        res.status(200).end();
-      }
+      'devoured': req.body.devoured}, condition, function(data) {
+        res.redirect('/burgers');
+      
     //end of burger.updateOne
     });
 // end of router.put
