@@ -28,7 +28,7 @@ body {
 img {
     width: 55%;
     height: 30%;
-    margin-right: -8%;
+    margin-right: -15%;
 }
 
 .row1 {
@@ -51,9 +51,19 @@ img {
     text-align: left;
     float: left;
 }
-#enter_text {
-    width: 50%;
-}
+
 #burgerinput {
-    width: 50%
+    width: 40%;
+    background-color: pink;
+}
+#createburg {
+    background-color: pink;
+    color: white;
+}
+#eat {
+    background-color: pink;
+    color: white;
+}
+h1 {
+    text-shadow: 2px 2px white;
 }
